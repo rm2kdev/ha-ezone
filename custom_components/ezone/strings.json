@@ -1,0 +1,120 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Advantage Air e-zone",
+        "description": "Enter the address of the e-zone / MyAir / MyPlace wall tablet. It must run firmware v14 or later (local API on port 2025).",
+        "data": {
+          "host": "[%key:common::config_flow::data::host%]",
+          "port": "[%key:common::config_flow::data::port%]"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the touch-screen tablet, e.g. 192.168.1.26. Give it a DHCP reservation so it doesn't move.",
+          "port": "The tablet's API port. Leave at 2025 unless you know otherwise."
+        }
+      },
+      "reconfigure": {
+        "title": "Change tablet address",
+        "data": {
+          "host": "[%key:common::config_flow::data::host%]",
+          "port": "[%key:common::config_flow::data::port%]"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the touch-screen tablet.",
+          "port": "The tablet's API port (normally 2025)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "unsupported_firmware": "The tablet answered but doesn't offer the JSON API on this port. Update the tablet firmware, or check the port.",
+      "no_aircons": "The tablet didn't report any aircons.",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]",
+      "reconfigure_successful": "[%key:common::config_flow::abort::reconfigure_successful%]",
+      "wrong_device": "That address belongs to a different e-zone tablet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Polling",
+        "data": {
+          "scan_interval": "Poll interval"
+        },
+        "data_description": {
+          "scan_interval": "How often to read the tablet, in seconds. Changes made from Home Assistant are re-read about a second later regardless."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "filter": { "name": "Filter needs cleaning" },
+      "fault": { "name": "Fault" },
+      "quiet_night_running": { "name": "Quiet night mode running" },
+      "app_update": { "name": "Tablet app update" },
+      "sensor_fault": { "name": "Sensor fault" }
+    },
+    "button": {
+      "scene": { "name": "Run {name}" }
+    },
+    "climate": {
+      "aircon": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "myzone": "MyZone",
+              "mytemp": "MyTemp",
+              "myauto": "MyAuto"
+            }
+          }
+        }
+      },
+      "zone": { "name": "Zone" }
+    },
+    "cover": {
+      "zone_damper": { "name": "Damper" }
+    },
+    "number": {
+      "timer_on": { "name": "Turn on in" },
+      "timer_off": { "name": "Turn off in" }
+    },
+    "select": {
+      "myzone": {
+        "name": "MyZone",
+        "state": { "none": "None (return air)" }
+      }
+    },
+    "sensor": {
+      "error_code": { "name": "Error code" },
+      "myauto_mode": {
+        "name": "MyAuto mode",
+        "state": {
+          "cool": "Cooling",
+          "heat": "Heating",
+          "vent": "Fan only",
+          "dry": "Dry"
+        }
+      },
+      "outdoor_temperature": { "name": "Outdoor temperature" },
+      "damper": { "name": "Damper" },
+      "signal": { "name": "Sensor signal" }
+    },
+    "switch": {
+      "quiet_night_mode": { "name": "Quiet night mode" },
+      "myfan": { "name": "MyFan" },
+      "fresh_air": { "name": "Fresh air" }
+    }
+  },
+  "exceptions": {
+    "update_failed": { "message": "Error reading the e-zone tablet: {error}" },
+    "unsupported_firmware": { "message": "The e-zone tablet doesn't support the JSON API: {error}" },
+    "command_rejected": { "message": "The e-zone tablet rejected the command: {error}" },
+    "command_failed": { "message": "Could not send the command to the e-zone tablet: {error}" },
+    "unsupported_hvac_mode": { "message": "This aircon doesn't support HVAC mode {mode}." },
+    "empty_scene": { "message": "Scene {name} has no aircon settings to apply." }
+  }
+}

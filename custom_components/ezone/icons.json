@@ -1,0 +1,42 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "filter": { "default": "mdi:air-filter" },
+      "quiet_night_running": { "default": "mdi:weather-night" },
+      "app_update": { "default": "mdi:tablet" }
+    },
+    "button": {
+      "scene": { "default": "mdi:palette" }
+    },
+    "climate": {
+      "zone": { "default": "mdi:home-thermometer" }
+    },
+    "cover": {
+      "zone_damper": {
+        "default": "mdi:hvac",
+        "state": { "closed": "mdi:hvac-off" }
+      }
+    },
+    "number": {
+      "timer_on": { "default": "mdi:timer-play-outline" },
+      "timer_off": { "default": "mdi:timer-stop-outline" }
+    },
+    "select": {
+      "myzone": { "default": "mdi:home-thermometer" }
+    },
+    "sensor": {
+      "error_code": { "default": "mdi:alert-circle-outline" },
+      "myauto_mode": { "default": "mdi:thermostat-auto" },
+      "damper": { "default": "mdi:valve" },
+      "signal": { "default": "mdi:wifi" }
+    },
+    "switch": {
+      "quiet_night_mode": {
+        "default": "mdi:weather-night",
+        "state": { "off": "mdi:weather-sunny" }
+      },
+      "myfan": { "default": "mdi:fan-auto" },
+      "fresh_air": { "default": "mdi:air-filter" }
+    }
+  }
+}

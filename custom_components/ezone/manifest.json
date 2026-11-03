@@ -1,0 +1,13 @@
+{
+  "domain": "ezone",
+  "name": "Advantage Air e-zone",
+  "codeowners": ["@rm2kdev"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/rm2kdev/ha-ezone",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/rm2kdev/ha-ezone/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
